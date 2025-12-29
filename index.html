@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EA AI</title>
+  </head>
+  <body class="bg-slate-50">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- Amazon Connect Chat Widget -->
+      <script type="text/javascript">
+        (function(w, d, x, id){
+        s=d.createElement('script');
+        s.src='https://eaacap.my.connect.aws/connectwidget/static/amazon-connect-chat-interface-client.js';
+        s.async=1;
+        s.id=id;
+        d.getElementsByTagName('head')[0].appendChild(s);
+        w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+        })(window, document, 'amazon_connect', 'a6ab4aff-3efc-442e-b5a5-a1a1a66b6b9b');
+        amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#201254' }, closeChat: { color: '#ffffff', backgroundColor: '#291254'} 
+        });
+        amazon_connect('snippetId', 'QVFJREFIaEdEc0hWQU9TcWFkUjZBZVY0bDJ6cnBCUVdIZ0EyUC9OWkxRSmRQWGEzY0FIQWFNRk1HUzRXbStXMnVGMUVCZW1iQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNREZOdlNMM2JLWEYxR2JjZUFnRVFnQ3ZSTVNEWVlHQldGYmRwTmVDSDlEU3V1WG40NktFYWtxQmVxQnZ4dGV4b1RuZE1hMDQyWjVMUk9tSkM6OkNQSFRFUzJkQ3AzczN0Q3VWN1ZTRU9IVSs2UVUwK09uclpoeXQyMWFCeTBQNlNTNjlDT3VWWjdqaUJEaGdwR2g0SEN5MmFROVl6MkVUWDJJQy9GVkEvS21QTG5lSTZUZnVKOHNiV3VZV2wwNGkyZnhETEltWmVuN0dYaCtSN1pvWDE1TGprWjZZanVaazZCc1ZJUkIyVjlLU01la1FxYz0=');
+        amazon_connect('supportedMessagingContentTypes', 
+        [ 'text/plain', 
+        'text/markdown', 
+        'application/vnd.amazonaws.connect.message.interactive', 
+        'application/vnd.amazonaws.connect.message.interactive.response' 
+        ]);
+        amazon_connect('customStyles', {
+          global: {
+          frameWidth: '400px',
+          frameHeight: '600px',
+          },
+          fullscreenMode: true // Enables fullscreen mode on the widget when a mobile screen size is detected in a web browser.
+          });
+      </script>
+</body>
+</html>
