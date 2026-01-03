@@ -16,7 +16,7 @@ export default function Header() {
           {/* Logo + Home Link */}
           <a href="#home" className="flex items-center gap-2" onClick={closeMobileMenu}>
             <Logo size={32} />
-            <span className="text-sm font-bold tracking-wide">EA AI</span>
+            <span className="text-sm font-bold tracking-wide">EAA Cap</span>
           </a>
 
           {/* Desktop nav */}

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a React-based landing page for EA AI (formerly EAA Capital), an AI consulting firm. The site is built with Vite, React Router, TailwindCSS, Framer Motion for animations, and Lucide React for icons.
+This is a React-based landing page for EAA Cap, an AI consulting firm. The site is built with Vite, React Router, TailwindCSS, Framer Motion for animations, and Lucide React for icons.
 
 ## Development Commands
 

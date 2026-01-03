@@ -91,7 +91,7 @@ export default function EAACapitalLanding() {
                 </span>
               </h1>
               <p className="mt-4 max-w-xl text-base text-slate-600 md:text-lg">
-                EA AI helps companies make confident decisions about how to incorporate AI into their operations. A simple, affordable, and reliable partner focused on real outcomes.
+                EAA Cap helps companies make confident decisions about how to incorporate AI into their operations. A simple, affordable, and reliable partner focused on real outcomes.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -212,7 +212,7 @@ export default function EAACapitalLanding() {
                 <li className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 text-indigo-600" /> Lower IT costs by 25% while converting new customers.</li>
               </ul>
               <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-700">
-                “EA AI helped us grow our ABA practice from 20 to 150 annual patients. While I focus on hiring and training therapists, developing new programs, and building relationships, EA AI provides the tools we need to attract new patients and automate time-consuming tasks—giving me and my team more time to do what we love most.”
+                “EAA Cap helped us grow our ABA practice from 20 to 150 annual patients. While I focus on hiring and training therapists, developing new programs, and building relationships, EAA Cap provides the tools we need to attract new patients and automate time-consuming tasks—giving me and my team more time to do what we love most.”
                 <div className="mt-2 text-xs text-slate-500">— Alex, CEO of Blossoming Mind Therapies</div>
               </div>
             </div>
@@ -298,9 +298,9 @@ export default function EAACapitalLanding() {
         <Container className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
           <div className="flex items-center gap-2">
              <Logo size={32} />
-            <div className="text-sm font-semibold">EA AI</div>
+            <div className="text-sm font-semibold">EAA Cap</div>
           </div>
-          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EA AI. All rights reserved.</div>
+          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EAA Cap. All rights reserved.</div>
         </Container>
       </footer>
     </div>

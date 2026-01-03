@@ -11,14 +11,14 @@ describe('EAACapitalLanding', () => {
   describe('Hero Section', () => {
     it('renders the main heading', () => {
       renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Technical Solutions')).toBeInTheDocument();
-      expect(screen.getByText('to Build & Scale Your Company')).toBeInTheDocument();
+      expect(screen.getByText('Confident AI solutions')).toBeInTheDocument();
+      expect(screen.getByText('focused on real outcomes')).toBeInTheDocument();
     });
 
     it('renders the hero description', () => {
       renderWithRouter(<EAACapitalLanding />);
       expect(
-        screen.getByText(/EA AI helps founders and operators make confident decisions/i)
+        screen.getByText(/EAA Cap helps companies make confident decisions/i)
       ).toBeInTheDocument();
     });
 
@@ -30,8 +30,8 @@ describe('EAACapitalLanding', () => {
 
     it('displays consulting and implementation tracks', () => {
       renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Consulting Tracks')).toBeInTheDocument();
-      expect(screen.getByText('Implementation Tracks')).toBeInTheDocument();
+      expect(screen.getByText('Consulting')).toBeInTheDocument();
+      expect(screen.getByText('Implementation')).toBeInTheDocument();
       expect(screen.getByText('Product & AI Strategy')).toBeInTheDocument();
       expect(screen.getByText('Public Websites')).toBeInTheDocument();
     });
@@ -71,7 +71,7 @@ describe('EAACapitalLanding', () => {
     it('displays key metrics', () => {
       renderWithRouter(<EAACapitalLanding />);
       expect(screen.getByText('$15M')).toBeInTheDocument();
-      expect(screen.getByText('35%')).toBeInTheDocument();
+      expect(screen.getByText('30%')).toBeInTheDocument();
       expect(screen.getByText('4 wks')).toBeInTheDocument();
       expect(screen.getByText('2 days')).toBeInTheDocument();
     });
@@ -87,7 +87,7 @@ describe('EAACapitalLanding', () => {
     it('renders client testimonial', () => {
       renderWithRouter(<EAACapitalLanding />);
       expect(
-        screen.getByText(/EA AI helped us grow our ABA practice/i)
+        screen.getByText(/EAA Cap helped us grow our ABA practice/i)
       ).toBeInTheDocument();
       expect(screen.getByText(/— Alex, CEO of Blossoming Mind Therapies/i)).toBeInTheDocument();
     });
@@ -95,7 +95,7 @@ describe('EAACapitalLanding', () => {
     it('displays efficiency gains bullet points', () => {
       renderWithRouter(<EAACapitalLanding />);
       expect(screen.getByText(/Deploy a customer experience desktop in minutes/i)).toBeInTheDocument();
-      expect(screen.getByText(/20–40% efficiency gains/i)).toBeInTheDocument();
+      expect(screen.getByText(/20–40% productivity gains/i)).toBeInTheDocument();
       expect(screen.getByText(/Lower IT costs by 25%/i)).toBeInTheDocument();
     });
   });
@@ -155,19 +155,19 @@ describe('EAACapitalLanding', () => {
   describe('Footer', () => {
     it('renders footer with company name', () => {
       renderWithRouter(<EAACapitalLanding />);
-      const footerElements = screen.getAllByText('EA AI');
+      const footerElements = screen.getAllByText('EAA Cap');
       expect(footerElements.length).toBeGreaterThan(0);
     });
 
     it('displays copyright with current year', () => {
       renderWithRouter(<EAACapitalLanding />);
       const currentYear = new Date().getFullYear();
-      expect(screen.getByText(new RegExp(`© ${currentYear} EA AI`))).toBeInTheDocument();
+      expect(screen.getByText(new RegExp(`© ${currentYear} EAA Cap`))).toBeInTheDocument();
     });
 
     it('renders logo in footer', () => {
       renderWithRouter(<EAACapitalLanding />);
-      const logos = screen.getAllByAltText('EA AI Logo');
+      const logos = screen.getAllByAltText('EAA Cap Logo');
       expect(logos.length).toBeGreaterThan(0);
     });
   });

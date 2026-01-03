@@ -114,14 +114,14 @@ export default function About() {
               transition={{ duration: 0.6 }}
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-                <Sparkles className="h-3.5 w-3.5 text-indigo-700" /> About EA AI
+                <Sparkles className="h-3.5 w-3.5 text-indigo-700" /> About EAA Cap
               </div>
               <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
                 A practical AI partner for teams that want real outcomes
               </h1>
               <p className="mt-4 max-w-2xl text-base text-slate-600 md:text-lg">
-                We help founders and operators design, deploy, and improve AI-powered systems—without the hype.
-                From strategy and architecture to implementation and enablement, we build solutions you can actually run.
+                We help founders and operators design, deploy, and improve AI-powered systems without the hype.
+                From strategy and architecture to implementation and enablement, we build solutions that fit your business.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -154,8 +154,8 @@ export default function About() {
                 <div className="flex items-center gap-3">
                   <Logo size={36} />
                   <div>
-                    <div className="text-sm font-semibold">EA AI</div>
-                    <div className="text-xs text-slate-500">AI Consulting • Automation • Enablement</div>
+                    <div className="text-sm font-semibold">EAA Cap</div>
+                    <div className="text-xs text-slate-500">Consulting • Implementation • AI Agents</div>
                   </div>
                 </div>
                 <div className="mt-6 grid gap-3">
@@ -163,7 +163,7 @@ export default function About() {
                     <CheckCircle2 className="mt-0.5 h-5 w-5 text-indigo-700" />
                     <div>
                       <div className="text-sm font-semibold text-slate-900">Outcome-first delivery</div>
-                      <div className="text-sm text-slate-600">We build measurable improvements—speed, quality, and cost.</div>
+                      <div className="text-sm text-slate-600">We build measurable improvements: speed, quality, and costs.</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -187,8 +187,7 @@ export default function About() {
             <div className="lg:col-span-5">
               <h2 className="text-2xl font-bold">Our mission</h2>
               <p className="mt-3 text-slate-600">
-                Help small and mid-sized businesses adopt AI responsibly and effectively—by pairing strong product thinking
-                with modern engineering.
+                To make technology work for businesses, not the other way around.
               </p>
             </div>
             <div className="lg:col-span-7 grid gap-4 sm:grid-cols-2">
@@ -222,7 +221,7 @@ export default function About() {
         <Container>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-bold sm:text-3xl">Leardership Team</h2>
-            <p className="mt-2 text-slate-600">Two operators who care about shipping the right thing—and making it last.</p>
+            <p className="mt-2 text-slate-600">Two process oriented experts that know how to bring visions to life.</p>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-1">
@@ -231,11 +230,11 @@ export default function About() {
               title="Founder & CEO"
               photoTestId="photo-edgar"
               photoSrc="/team/Edgar.jpg"
-              bio="Edgar is a seasoned entrepreneur and product management leader who founded his first company, Lucky Backpack, at age 21 and has held senior roles at Amazon Web Services, Amazon Operations, and Accenture. 
+              bio="Edgar is an entrepreneur and product management leader who founded his first company, Lucky Backpack, at 21 and has held senior roles at Amazon Web Services, Amazon Operations, and Accenture. 
               
               At Amazon, Edgar led key innovations across AWS customer experience products, notably launching Amazon Connect’s agent applications and scaling them from inception to millions of daily users.
               
-              Edgar created EA AI to enable organizations of any background to adopt practical AI solutions that improve customer experiences and operational efficiency."
+              Edgar created EAA Cap to enable organizations of any background to adopt practical AI solutions that improve customer experiences and operational efficiency."
             />
             <PersonCard
               name="Clarem Gonzalez"
@@ -287,9 +286,9 @@ Her strength lies in connecting strategy with execution, keeping teams aligned, 
         <Container className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
           <div className="flex items-center gap-2">
             <Logo size={32} />
-            <div className="text-sm font-semibold">EA AI</div>
+            <div className="text-sm font-semibold">EAA Cap</div>
           </div>
-          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EA AI. All rights reserved.</div>
+          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EAA Cap. All rights reserved.</div>
         </Container>
       </footer>
     </div>

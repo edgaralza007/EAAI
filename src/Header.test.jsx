@@ -10,8 +10,8 @@ const renderWithRouter = (component) => {
 describe('Header', () => {
   it('renders the logo and company name', () => {
     renderWithRouter(<Header />);
-    expect(screen.getByText('EA AI')).toBeInTheDocument();
-    expect(screen.getByAltText('EA AI Logo')).toBeInTheDocument();
+    expect(screen.getByText('EAA Cap')).toBeInTheDocument();
+    expect(screen.getByAltText('EAA Cap Logo')).toBeInTheDocument();
   });
 
   it('renders all navigation links', () => {
@@ -54,7 +54,7 @@ describe('Header', () => {
 
   it('home link points to #home', () => {
     renderWithRouter(<Header />);
-    const homeLink = screen.getByText('EA AI').closest('a');
+    const homeLink = screen.getByText('EAA Cap').closest('a');
     expect(homeLink).toHaveAttribute('href', '#home');
   });
 });

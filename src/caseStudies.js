@@ -19,7 +19,7 @@ export const caseStudies = [
       "Saved 15+ hours per week on administrative tasks"
     ],
     testimonial: {
-      quote: "EA AI helped us grow our ABA practice from 20 to 150 annual patients. While I focus on hiring and training therapists, developing new programs, and building relationships, EA AI provides the tools we need to attract new patients and automate time-consuming tasks—giving me and my team more time to do what we love most.",
+      quote: "EAA Cap helped us grow our ABA practice from 20 to 150 annual patients. While I focus on hiring and training therapists, developing new programs, and building relationships, EAA Cap provides the tools we need to attract new patients and automate time-consuming tasks—giving me and my team more time to do what we love most.",
       author: "Alex, CEO"
     },
     technologies: ["Amazon Connect", "CRM Integration", "AI Chatbots", "Workflow Automation"]

@@ -140,9 +140,9 @@ export default function Portfolio() {
         <Container className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
           <div className="flex items-center gap-2">
             <Logo size={32} />
-            <div className="text-sm font-semibold">EA AI</div>
+            <div className="text-sm font-semibold">EAA Cap</div>
           </div>
-          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EA AI. All rights reserved.</div>
+          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EAA Cap. All rights reserved.</div>
         </Container>
       </footer>
     </div>
