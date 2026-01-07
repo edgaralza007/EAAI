@@ -152,7 +152,7 @@ export default function EAACapitalLanding() {
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <h2 className="text-2xl font-bold sm:text-3xl">What We Do</h2>
             <p className="mt-2 text-slate-600">
-             Comprehensive technology solutions tailored for small and medium businesses. We deliver websites, contact center & CRM solutions, and AI agents that drive growth and cost savings.
+             Comprehensive process improvement, change management, and technology solutions tailored for emerging businesses. We enable business transformation and deliver websites, contact center & CRM solutions, and AI agents that drive growth and cost savings.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
