@@ -85,26 +85,26 @@ export default function EAACapitalLanding() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-                Confident AI solutions
+                The right technology,
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
-                  focused on real outcomes
+                  made simple.
                 </span>
               </h1>
               <p className="mt-4 max-w-xl text-base text-slate-600 md:text-lg">
-                EAA Cap helps companies make confident decisions about how to incorporate AI into their operations. A simple, affordable, and reliable partner focused on real outcomes.
+                EAA Cap helps small businesses confidently adopt tools and AI that make work easier, not harder. We guide the process, handle the details, and deliver solutions built for real teams and real goals.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#contact"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
                 >
-                  Book a Free Discovery Call <ArrowRight className="h-4 w-4" />
+                  Start a Conversation <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="#results"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50"
                 >
-                  View Results
+                  See How We Help
                 </a>
               </div>
             </motion.div>
