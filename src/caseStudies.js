@@ -7,7 +7,7 @@ export const caseStudies = [
     category: "Healthcare",
     excerpt: "How we helped a growing ABA therapy practice scale from 20 to 150 annual patients by automating patient intake and optimizing operations.",
     image: "/logos/blossom.jpg",
-    date: "2024-11",
+    date: "2025-11",
     readTime: "5 min read",
     tags: ["CRM", "Automation", "Healthcare"],
     challenge: "Blossoming Mind Therapies was experiencing rapid growth but struggling with manual patient intake processes, time-consuming administrative tasks, and inefficient communication workflows. The CEO needed to focus on hiring therapists and developing programs, not paperwork.",
@@ -24,6 +24,7 @@ export const caseStudies = [
     },
     technologies: ["Amazon Connect", "CRM Integration", "AI Chatbots", "Workflow Automation"]
   },
+  /*
   {
     id: 2,
     slug: "enterprise-customer-service-transformation",
@@ -46,6 +47,7 @@ export const caseStudies = [
     testimonial: null,
     technologies: ["Amazon Connect", "Custom UI Development", "API Integration", "React"]
   },
+  */
   {
     id: 3,
     slug: "ai-powered-sales-automation",
@@ -54,7 +56,7 @@ export const caseStudies = [
     category: "Technology",
     excerpt: "Built intelligent sales chatbots and automated lead qualification that increased conversion rates by 45%.",
     image: "/services/agents.jpg",
-    date: "2024-07",
+    date: "2025-07",
     readTime: "4 min read",
     tags: ["AI Agents", "Sales", "B2B"],
     challenge: "A fast-growing B2B SaaS company was struggling to keep up with inbound lead volume. Their small sales team was spending too much time on unqualified leads, and response times were suffering, resulting in lost opportunities.",

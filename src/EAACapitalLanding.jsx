@@ -219,7 +219,7 @@ export default function EAACapitalLanding() {
             <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-50 to-blue-50 p-8">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="rounded-2xl bg-white p-6 shadow-sm">
-                  <div className="text-3xl font-extrabold">$15M</div>
+                  <div className="text-3xl font-extrabold">$5M</div>
                   <div className="mt-1 text-sm text-slate-600">Savings reported by clients</div>
                 </div>
                 <div className="rounded-2xl bg-white p-6 shadow-sm">
