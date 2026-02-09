@@ -91,7 +91,7 @@ export default function EAACapitalLanding() {
                 </span>
               </h1>
               <p className="mt-4 max-w-xl text-base text-slate-600 md:text-lg">
-                EAA Cap helps small businesses confidently adopt tools and AI that make work easier, not harder. We guide the process, handle the details, and deliver solutions built for real teams and real goals.
+                EAA Cap helps businesses confidently adopt tools and AI that make work easier, not harder. We guide the process, handle the details, and deliver solutions built for real teams and real goals.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
