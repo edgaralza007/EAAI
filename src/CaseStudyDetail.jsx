@@ -41,7 +41,7 @@ export default function CaseStudyDetail() {
       </div>
 
       {/* Hero */}
-      <Section className="pt-8 pb-0">
+      <Section className="!py-10">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -92,7 +92,7 @@ export default function CaseStudyDetail() {
       </Section>
 
       {/* Featured Image */}
-      <Section className="pt-8">
+      <Section className="pt-[18px] pb-[32px] md:pt-[45px] md:pb-[45px]">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -103,7 +103,7 @@ export default function CaseStudyDetail() {
             <img
               src={caseStudy.image}
               alt={caseStudy.title}
-              className="h-96 w-full object-cover"
+              className="h-[480px] w-full object-cover"
             />
           </motion.div>
         </Container>

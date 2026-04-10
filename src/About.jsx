@@ -160,7 +160,7 @@ export default function About() {
                     <CheckCircle2 className="mt-0.5 h-5 w-5 text-indigo-700" />
                     <div>
                       <div className="text-sm font-semibold text-slate-900">Outcome-first delivery</div>
-                      <div className="text-sm text-slate-600">We build measurable improvements: speed, quality, and costs.</div>
+                      <div className="text-sm text-slate-600">We build measurable improvements: speed, quality, and cost.</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -217,8 +217,8 @@ export default function About() {
       <Section className="bg-slate-100">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold sm:text-3xl">Leardership Team</h2>
-            <p className="mt-2 text-slate-600">Two process oriented experts that know how to bring visions to life.</p>
+            <h2 className="text-2xl font-bold sm:text-3xl">Leadership Team</h2>
+            <p className="mt-2 text-slate-600">Two process-oriented experts that know how to bring visions to life.</p>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-1">

@@ -135,7 +135,7 @@ export default function EAACapitalLanding() {
                         <li>Public Websites</li>
                         <li>Contact Center & CRM</li>
                         <li>Bespoke Applications</li>
-                        <li>AI agents</li>
+                        <li>AI Agents</li>
                       </ul>
                     </div>
                   </div>
@@ -159,13 +159,13 @@ export default function EAACapitalLanding() {
             <Feature
               imageSrc="/services/process.jpg"
               imageAlt="Process transformation illustration"
-              title=" Process Transformation"
-              desc="Transform and optimize your processes with the right tools and training for your business"
+              title="Process Transformation"
+              desc="Transform and optimize your processes with the right tools and training for your business."
             />
             <Feature
               imageSrc="/services/website.jpg"
               imageAlt="Professional websites illustration"
-              title=" Professional Websites"
+              title="Professional Websites"
               desc="Modern, responsive websites that convert visitors into customers. Built with the latest technologies for optimal performance and SEO."
             />
             <Feature

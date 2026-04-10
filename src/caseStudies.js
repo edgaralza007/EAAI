@@ -6,7 +6,7 @@ export const caseStudies = [
     client: "Blossoming Mind Therapies",
     category: "Healthcare",
     excerpt: "How we helped a growing ABA therapy practice scale from 20 to 150 annual patients by automating patient intake and optimizing operations.",
-    image: "/logos/blossom.jpg",
+    image: "/logos/blossom.jpeg",
     date: "2025-11",
     readTime: "5 min read",
     tags: ["CRM", "Automation", "Healthcare"],
