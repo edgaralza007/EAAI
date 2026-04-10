@@ -27,7 +27,7 @@ export default function Header() {
                 e.preventDefault();
                 window.location.href = "/#services";
               }}
-              className="text-sm text-slate-700 hover:text-slate-900"
+              className="text-sm text-slate-700 transition-colors duration-200 hover:text-slate-900"
             >
               Services
             </a>
@@ -37,7 +37,7 @@ export default function Header() {
                 e.preventDefault();
                 window.location.href = "/#results";
               }}
-              className="text-sm text-slate-700 hover:text-slate-900"
+              className="text-sm text-slate-700 transition-colors duration-200 hover:text-slate-900"
             >
               Results
             </a>
@@ -47,19 +47,19 @@ export default function Header() {
                 e.preventDefault();
                 window.location.href = "/#contact";
               }}
-              className="text-sm text-slate-700 hover:text-slate-900"
+              className="text-sm text-slate-700 transition-colors duration-200 hover:text-slate-900"
             >
               Contact
             </a>
             <Link
               to="/about"
-              className="text-sm text-slate-700 hover:text-slate-900"
+              className="text-sm text-slate-700 transition-colors duration-200 hover:text-slate-900"
             >
               About
             </Link>
             <Link
               to="/portfolio"
-              className="text-sm text-slate-700 hover:text-slate-900"
+              className="text-sm text-slate-700 transition-colors duration-200 hover:text-slate-900"
             >
               Portfolio
             </Link>
@@ -72,7 +72,7 @@ export default function Header() {
               e.preventDefault();
               window.location.href = "/#contact";
             }}
-            className="hidden rounded-xl bg-zinc-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 md:inline-block"
+            className="hidden rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95 md:inline-block"
           >
             Book a Consult
           </a>
@@ -178,7 +178,7 @@ export default function Header() {
                 closeMobileMenu();
                 window.location.href = "/#contact";
               }}
-              className="mt-2 block rounded-xl bg-zinc-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+              className="mt-2 block rounded-xl bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
             >
               Book a Consult
             </a>

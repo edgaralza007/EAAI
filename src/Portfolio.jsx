@@ -7,7 +7,7 @@ import Logo from "./logo";
 import { caseStudies } from "./caseStudies";
 
 const Section = ({ children, className = "" }) => (
-  <section className={`py-14 md:py-20 ${className}`}>{children}</section>
+  <section className={`py-16 md:py-24 ${className}`}>{children}</section>
 );
 
 const Container = ({ children, className = "" }) => (
@@ -82,7 +82,7 @@ export default function Portfolio() {
       <Header />
 
       {/* Hero */}
-      <Section className="pt-10 md:pt-14 bg-slate-100">
+      <Section className="bg-slate-100">
         <Container>
           <motion.div
             className="mx-auto max-w-3xl text-center"
@@ -126,7 +126,7 @@ export default function Portfolio() {
                   e.preventDefault();
                   window.location.href = "/#contact";
                 }}
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
               >
                 Book a Consult <ArrowRight className="h-4 w-4" />
               </a>

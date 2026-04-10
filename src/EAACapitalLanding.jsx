@@ -76,7 +76,7 @@ export default function EAACapitalLanding() {
       <Header />
 
       {/* Hero */}
-      <Section id="home" className="pb-10 pt-12 md:pt-20 bg-slate-100">
+      <Section id="home" className="bg-slate-100">
         <Container>
           <div className="grid items-center gap-10 md:grid-cols-2">
             <motion.div
@@ -86,17 +86,17 @@ export default function EAACapitalLanding() {
             >
               <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
                 The right technology,
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
+                <span className="block text-indigo-600">
                   made simple.
                 </span>
               </h1>
               <p className="mt-4 max-w-xl text-base text-slate-600 md:text-lg">
-                EAA Cap helps businesses confidently adopt tools and AI that make work easier, not harder. We guide the process, handle the details, and deliver solutions built for real teams and real goals.
+                EAA Cap helps businesses confidently adopt tools that make work easier, not harder. We guide the process, handle the details, and deliver solutions built for real teams and real goals.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
                 >
                   Start a Conversation <ArrowRight className="h-4 w-4" />
                 </a>
@@ -134,7 +134,7 @@ export default function EAACapitalLanding() {
                       <ul className="space-y-1 text-sm text-slate-600">
                         <li>Public Websites</li>
                         <li>Contact Center & CRM</li>
-                        <li>Chatbots</li>
+                        <li>Bespoke Applications</li>
                         <li>AI agents</li>
                       </ul>
                     </div>
@@ -176,9 +176,9 @@ export default function EAACapitalLanding() {
             />
             <Feature
               imageSrc="/services/agents.jpg"
-              imageAlt="Chatbots and AI agents illustration"
-              title="Chatbots & AI Agents"
-              desc="Automate customer service and sales processes with intelligent chatbots and AI agents that work 24/7 to grow your business."
+              imageAlt="AI agents illustration"
+              title="AI Agents"
+              desc="Automate front and back office operations with customized AI agents that work 24/7 for your business."
             />
           </div>
         </Container>
@@ -268,7 +268,7 @@ export default function EAACapitalLanding() {
                   <textarea rows={4} name="message" placeholder="Let us know how we can help you" className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none ring-indigo-200 focus:ring" />
                 </div>
               </div>
-              <button type="submit" className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-600">
+              <button type="submit" className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95">
                 Send Inquiry <ArrowRight className="h-4 w-4" />
               </button>
             </form>

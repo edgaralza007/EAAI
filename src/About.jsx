@@ -5,7 +5,7 @@ import Header from "./Header";
 import Logo from "./logo";
 
 const Section = ({ children, className = "" }) => (
-  <section className={`py-14 md:py-20 ${className}`}>{children}</section>
+  <section className={`py-16 md:py-24 ${className}`}>{children}</section>
 );
 
 const Container = ({ children, className = "" }) => (
@@ -87,7 +87,7 @@ const PersonCard = ({ name, title, bio, photoTestId, photoSrc, href, ctaLabel = 
           {href && (
             <a
               {...linkProps}
-              className="pointer-events-auto relative z-20 mt-5 inline-flex items-center justify-center rounded-xl bg-zinc-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600"
+              className="pointer-events-auto relative z-20 mt-5 inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
             >
               {ctaLabel}
             </a>
@@ -104,7 +104,7 @@ export default function About() {
       <Header />
 
       {/* Hero */}
-      <Section className="pt-10 md:pt-14 bg-slate-100">
+      <Section className="bg-slate-100">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
             <motion.div
@@ -113,9 +113,6 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-                <Sparkles className="h-3.5 w-3.5 text-indigo-700" /> About EAA Cap
-              </div>
               <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
                 A practical AI partner for teams that want real outcomes
               </h1>
@@ -131,7 +128,7 @@ export default function About() {
                     e.preventDefault();
                     window.location.href = "/#contact";
                   }}
-                  className="inline-flex items-center justify-center rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600"
+                  className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
                 >
                   Book a Consult
                 </a>
@@ -155,7 +152,7 @@ export default function About() {
                   <Logo size={36} />
                   <div>
                     <div className="text-sm font-semibold">EAA Cap</div>
-                    <div className="text-xs text-slate-500">Consulting • Implementation • AI Agents</div>
+                    <div className="text-xs text-slate-500">Consulting • Applications • AI Agents</div>
                   </div>
                 </div>
                 <div className="mt-6 grid gap-3">
@@ -271,7 +268,7 @@ Her strength lies in connecting strategy with execution, keeping teams aligned, 
                     e.preventDefault();
                     window.location.href = "/#contact";
                   }}
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 md:w-auto"
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95 md:w-auto"
                 >
                   Book a Consult
                 </a>
