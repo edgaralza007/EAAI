@@ -1,230 +1,154 @@
 import React from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowLeft, CheckCircle2, Clock, Calendar, Tag, Quote } from "lucide-react";
-import Header from "./Header";
-import Logo from "./logo";
+import { ArrowLeft } from "lucide-react";
+import PageLayout from "./components/PageLayout";
+import Section from "./components/Section";
+import Container from "./components/Container";
+import Display from "./components/Display";
+import Button from "./components/Button";
+import Reveal from "./components/Reveal";
 import { caseStudies } from "./caseStudies";
 
-const Section = ({ children, className = "" }) => (
-  <section className={`py-14 md:py-20 ${className}`}>{children}</section>
-);
-
-const Container = ({ children, className = "" }) => (
-  <div className={`mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
-);
+// Label sits directly above its content on the same left edge. The first pass
+// hung labels in a left margin column, which split every block into two
+// horizontal fixations for no gain.
+function Block({ label, children }) {
+  return (
+    <section className="border-t border-rule py-10">
+      <h2 className="text-2xs uppercase tracking-label text-accent">{label}</h2>
+      <div className="mt-5">{children}</div>
+    </section>
+  );
+}
 
 export default function CaseStudyDetail() {
   const { slug } = useParams();
-  const caseStudy = caseStudies.find(cs => cs.slug === slug);
+  const caseStudy = caseStudies.find((cs) => cs.slug === slug);
 
-  // If case study not found, redirect to portfolio
   if (!caseStudy) {
     return <Navigate to="/portfolio" replace />;
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900">
-      <Header />
+  const longDate = new Date(caseStudy.date).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
 
-      {/* Back Button */}
-      <div className="border-b border-slate-200 bg-white">
-        <Container className="py-4">
+  return (
+    <PageLayout>
+      <Section space="tight" className="pt-8 md:pt-12">
+        <Container width="narrow">
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-indigo-700 transition"
+            className="inline-flex items-center gap-2 text-2xs uppercase tracking-label text-ink-muted transition-colors hover:text-accent"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
             Back to Portfolio
           </Link>
-        </Container>
-      </div>
 
-      {/* Hero */}
-      <Section className="!py-10">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Category Badge */}
-            <div className="mb-4">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">
-                {caseStudy.category}
-              </span>
+          <Reveal className="mt-10">
+            <div className="text-2xs uppercase tracking-label text-accent">
+              {caseStudy.category}
             </div>
 
-            {/* Title */}
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+            <Display as="h1" size="lg" className="mt-5">
               {caseStudy.title}
-            </h1>
+            </Display>
 
-            {/* Meta Info */}
-            <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate-600">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                {new Date(caseStudy.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4" />
-                {caseStudy.readTime}
-              </span>
-              <span>•</span>
-              <span className="font-semibold text-slate-900">{caseStudy.client}</span>
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-2xs uppercase tracking-label text-ink-muted">
+              <span className="text-ink">{caseStudy.client}</span>
+              <span aria-hidden="true" className="h-px w-4 bg-rule" />
+              <span>{longDate}</span>
+              <span aria-hidden="true" className="h-px w-4 bg-rule" />
+              <span>{caseStudy.readTime}</span>
             </div>
-
-            {/* Tags */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              {caseStudy.tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
-                >
-                  <Tag className="h-3 w-3" />
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+          </Reveal>
         </Container>
       </Section>
 
-      {/* Featured Image */}
-      <Section className="pt-[18px] pb-[32px] md:pt-[45px] md:pb-[45px]">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg"
-          >
+      <Section space="flush" className="pt-8">
+        <Container width="narrow">
+          <Reveal>
             <img
               src={caseStudy.image}
               alt={caseStudy.title}
-              className="h-[480px] w-full object-cover"
+              width={1000}
+              height={560}
+              className="aspect-[16/9] w-full rounded-lg border border-rule object-cover"
             />
-          </motion.div>
+          </Reveal>
         </Container>
       </Section>
 
-      {/* Content */}
-      <Section className="pt-8">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="prose prose-slate max-w-none"
-          >
-            {/* Challenge */}
-            <div className="mb-10">
-              <h2 className="mb-4 text-2xl font-bold text-slate-900">The Challenge</h2>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <p className="text-slate-700 leading-relaxed">{caseStudy.challenge}</p>
-              </div>
-            </div>
+      <Section space="tight" className="pt-12 md:pt-16">
+        <Container width="narrow">
+          <Block label="The Challenge">
+            <p className="text-lg leading-[1.65] text-ink-muted">{caseStudy.challenge}</p>
+          </Block>
 
-            {/* Solution */}
-            <div className="mb-10">
-              <h2 className="mb-4 text-2xl font-bold text-slate-900">Our Solution</h2>
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <p className="text-slate-700 leading-relaxed">{caseStudy.solution}</p>
-              </div>
-            </div>
+          <Block label="Our Solution">
+            <p className="text-lg leading-[1.65] text-ink-muted">{caseStudy.solution}</p>
+          </Block>
 
-            {/* Results */}
-            <div className="mb-10">
-              <h2 className="mb-4 text-2xl font-bold text-slate-900">The Results</h2>
-              <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-indigo-50 to-blue-50 p-6">
-                <ul className="space-y-3">
-                  {caseStudy.results.map((result, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-indigo-700" />
-                      <span className="text-slate-900 font-medium">{result}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          <Block label="The Results">
+            <ul>
+              {caseStudy.results.map((r) => (
+                <li key={r} className="flex gap-4 border-b border-rule py-4 first:border-t">
+                  <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-accent" />
+                  <span className="text-lg leading-[1.6] text-ink">{r}</span>
+                </li>
+              ))}
+            </ul>
+          </Block>
 
-            {/* Testimonial */}
-            {caseStudy.testimonial && (
-              <div className="mb-10">
-                <h2 className="mb-4 text-2xl font-bold text-slate-900">Client Testimonial</h2>
-                <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                  <Quote className="mb-4 h-8 w-8 text-indigo-700" />
-                  <blockquote className="text-lg italic text-slate-700 leading-relaxed">
-                    "{caseStudy.testimonial.quote}"
-                  </blockquote>
-                  <p className="mt-4 text-sm font-semibold text-slate-900">
-                    — {caseStudy.testimonial.author}, {caseStudy.client}
-                  </p>
-                </div>
-              </div>
-            )}
+          {caseStudy.testimonial && (
+            <Block label="Client Testimonial">
+              <figure className="border-l-2 border-accent pl-7">
+                <blockquote className="font-serif text-2xl italic leading-[1.4] text-ink">
+                  “{caseStudy.testimonial.quote}”
+                </blockquote>
+                <figcaption className="mt-5 text-2xs uppercase tracking-label text-ink-muted">
+                  — {caseStudy.testimonial.author}, {caseStudy.client}
+                </figcaption>
+              </figure>
+            </Block>
+          )}
 
-            {/* Technologies */}
-            <div className="mb-10">
-              <h2 className="mb-4 text-2xl font-bold text-slate-900">Technologies Used</h2>
-              <div className="flex flex-wrap gap-3">
-                {caseStudy.technologies.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </Container>
-      </Section>
-
-      {/* CTA */}
-      <Section className="bg-slate-100">
-        <Container>
-          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-50 to-blue-50 p-8 md:p-10">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-2xl font-bold">Want similar results for your business?</h2>
-              <p className="mt-2 text-slate-600">
-                Let's discuss how we can help you achieve your goals with AI and automation.
-              </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <a
-                  href="/#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/#contact";
-                  }}
-                  className="inline-flex items-center justify-center rounded-xl bg-zinc-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600"
+          <Block label="Technologies Used">
+            <ul className="flex flex-wrap gap-2">
+              {caseStudy.technologies.map((tech) => (
+                <li
+                  key={tech}
+                  className="rounded-lg border border-rule bg-paper-raised px-3.5 py-1.5 text-sm text-ink"
                 >
-                  Book a Consult
-                </a>
-                <Link
-                  to="/portfolio"
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50"
-                >
-                  View More Case Studies
-                </Link>
-              </div>
-            </div>
-          </div>
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </Block>
         </Container>
       </Section>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white">
-        <Container className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <Logo size={32} />
-            <div className="text-sm font-semibold">EAA Cap</div>
-          </div>
-          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EAA Cap. All rights reserved.</div>
+      <Section bordered>
+        <Container width="narrow">
+          <Reveal>
+            <Display as="h2" size="md">
+              Want similar results for your business?
+            </Display>
+            <p className="mt-5 text-lg leading-[1.65] text-ink-muted">
+              Let's discuss how we can help you achieve your goals with AI and automation.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button to="/#contact" variant="primary" arrow>
+                Book a Consult
+              </Button>
+              <Button to="/portfolio" variant="secondary">
+                View More Case Studies
+              </Button>
+            </div>
+          </Reveal>
         </Container>
-      </footer>
-    </div>
+      </Section>
+    </PageLayout>
   );
 }

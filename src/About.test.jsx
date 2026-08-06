@@ -1,49 +1,72 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-import About from "./About";
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import About from './About';
 
-const renderWithRouter = (component) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
-};
+const renderPage = () =>
+  render(
+    <BrowserRouter>
+      <About />
+    </BrowserRouter>
+  );
 
-describe("About", () => {
-  it("renders the About page heading", () => {
-    renderWithRouter(<About />);
+describe('About', () => {
+  it('renders the page heading', () => {
+    renderPage();
     expect(
-      screen.getByText(/A practical AI partner for teams that want real outcomes/i)
+      screen.getByText(/A practical AI partner for real outcomes/i)
     ).toBeInTheDocument();
   });
 
-  it("renders mission section", () => {
-    renderWithRouter(<About />);
-    expect(screen.getByText(/Our mission/i)).toBeInTheDocument();
+  it('renders the mission', () => {
+    renderPage();
+    expect(screen.getByText('Our mission')).toBeInTheDocument();
     expect(
-      screen.getByText(/Help small and mid-sized businesses adopt AI responsibly/i)
+      screen.getByText(/To make technology work for businesses, not the other way around/i)
     ).toBeInTheDocument();
   });
 
-  it("does not render the removed 'What you can expect' section", () => {
-    renderWithRouter(<About />);
-    expect(screen.queryByText(/What you can expect/i)).not.toBeInTheDocument();
+  it('renders both principle groups', () => {
+    renderPage();
+    expect(screen.getByText('What we optimize for')).toBeInTheDocument();
+    expect(screen.getByText('How we work')).toBeInTheDocument();
+    expect(
+      screen.getByText('Faster workflows and reduced manual effort')
+    ).toBeInTheDocument();
+    expect(screen.getByText('Knowledge transfer built-in')).toBeInTheDocument();
   });
 
-  it("renders team members with photo placeholders", () => {
-    const { container } = renderWithRouter(<About />);
-
-    // Heading text can change; just assert that some "team" heading exists.
-    expect(screen.getAllByText(/team/i).length).toBeGreaterThan(0);
-    expect(screen.getByText("Edgar Alza")).toBeInTheDocument();
-    expect(screen.getByText("Clarem Gonzalez")).toBeInTheDocument();
+  it('renders both team members with their photos', () => {
+    const { container } = renderPage();
+    expect(screen.getByText('Leadership Team')).toBeInTheDocument();
+    expect(screen.getByText('Edgar Alza')).toBeInTheDocument();
+    expect(screen.getByText('Clarem Gonzalez')).toBeInTheDocument();
 
     expect(container.querySelector('[data-testid="photo-edgar"]')).toBeInTheDocument();
     expect(container.querySelector('[data-testid="photo-clarem"]')).toBeInTheDocument();
   });
 
-  it("includes the Header component", () => {
-    renderWithRouter(<About />);
-    expect(screen.getByText("Services")).toBeInTheDocument();
-    expect(screen.getByText("Portfolio")).toBeInTheDocument();
-    expect(screen.getByText("About")).toBeInTheDocument();
+  // The old PersonCard stretched an invisible anchor over the whole card and
+  // disabled pointer events on the content. The link is now explicit, so it
+  // should be reachable as a real link with a real accessible name.
+  it("exposes Clarem's site as an ordinary external link", () => {
+    renderPage();
+    const link = screen.getByText('Visit Site').closest('a');
+    expect(link).toHaveAttribute('href', 'https://claremglez.com');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', expect.stringContaining('noopener'));
+  });
+
+  it('renders the closing call to action', () => {
+    renderPage();
+    expect(screen.getByText(/Want to see if we.?re a fit\?/i)).toBeInTheDocument();
+    expect(screen.getAllByText('Book a Consult').length).toBeGreaterThan(0);
+  });
+
+  it('includes the shared chrome', () => {
+    renderPage();
+    expect(screen.getAllByText('Services').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Portfolio').length).toBeGreaterThan(0);
+    expect(screen.getByRole('main')).toBeInTheDocument();
   });
 });

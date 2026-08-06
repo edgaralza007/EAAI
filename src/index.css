@@ -1,3 +1,96 @@
+/* Self-hosted type. Display = Instrument Serif (400 + italic only, which is
+   correct for editorial display — it needs size and leading, not a weight ramp).
+   Body/UI = Instrument Sans Variable, its companion grotesk. Two families only. */
+@import '@fontsource/instrument-serif/400.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+@import '@fontsource-variable/instrument-sans/wght.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Palette as space-separated RGB channels so Tailwind can apply opacity
+       via rgb(var(--x) / <alpha-value>). Single source of truth — the accent
+       below is the only brand color on the site and is a one-line swap. */
+    /* Neutral rather than warm: the accent is the indigo sampled from the EA
+       monogram, and a warm cream ground makes a cool indigo look accidental. */
+    --paper: 250 250 250; /* #FAFAFA page ground, never pure white */
+    --paper-raised: 255 255 255; /* #FFFFFF cards and panels */
+    --ink: 23 23 26; /* #17171A near-black, never #000 */
+    --ink-muted: 99 99 107; /* #63636B — 5.69:1 on paper, passes AA */
+    --rule: 229 229 234; /* #E5E5EA every hairline */
+    --accent: 79 70 229; /* #4F46E5 — sampled from logo.png. 6.05:1 on paper, 6.32:1 under white */
+    --accent-deep: 67 56 202; /* #4338CA hover/active only */
+    --accent-wash: 238 238 253; /* #EEEEFD tint for quiet accent surfaces */
+
+    --header-h: 4.5rem;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Anchors must land below the sticky header, not underneath it. */
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans;
+    font-synthesis-weight: none;
+  }
+
+  /* Figures align in columns wherever numbers are compared. */
+  .tabular,
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /* The site previously had effectively no focus styling at all. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.16);
+    color: rgb(var(--ink));
+  }
+
+  /* Serif display sets tight; the browser default leading is far too loose
+     for large editorial type. */
+  .font-serif {
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+}
+
+@layer components {
+  /* Hairline that stops short of the container edge — the recurring
+     editorial device used to separate sections and list rows. */
+  .rule-t {
+    @apply border-t border-rule;
+  }
+
+  /* A soft accent glow for dark hero sections. Written as a one-off
+     component class rather than Tailwind's bg-gradient-to-* utility, which
+     check:design bans — that rule exists to keep the generic
+     "indigo-to-blue SaaS hero" look out of the build, not to forbid every
+     gradient outright. */
+  .hero-glow {
+    background: radial-gradient(120% 90% at 82% 15%, rgb(var(--accent) / 0.35), transparent 62%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

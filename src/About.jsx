@@ -1,22 +1,33 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { CheckCircle2, ShieldCheck, Sparkles, Target } from "lucide-react";
-import Header from "./Header";
-import Logo from "./logo";
+import PageLayout from "./components/PageLayout";
+import Section from "./components/Section";
+import Container from "./components/Container";
+import Eyebrow from "./components/Eyebrow";
+import Display from "./components/Display";
+import SectionHeader from "./components/SectionHeader";
+import Button from "./components/Button";
+import Reveal from "./components/Reveal";
 
-const Section = ({ children, className = "" }) => (
-  <section className={`py-16 md:py-24 ${className}`}>{children}</section>
-);
+const principles = [
+  {
+    heading: "What we optimize for",
+    items: [
+      "Faster workflows and reduced manual effort",
+      "Better customer experience and conversion",
+      "Clear ownership, documentation, and training",
+    ],
+  },
+  {
+    heading: "How we work",
+    items: [
+      "Short cycles with real deliverables",
+      "Simple, maintainable tech choices",
+      "Knowledge transfer built-in",
+    ],
+  },
+];
 
-const Container = ({ children, className = "" }) => (
-  <div className={`mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
-);
-
-const Card = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border border-slate-200 bg-white p-6 shadow-sm ${className}`}>{children}</div>
-);
-
-const PersonPhoto = ({ label, testId, src }) => {
+function PersonPhoto({ label, testId, src }) {
   const [hasError, setHasError] = useState(false);
 
   if (!src || hasError) {
@@ -24,11 +35,10 @@ const PersonPhoto = ({ label, testId, src }) => {
       <div
         data-testid={testId}
         aria-label={label}
-        className="h-56 w-56 shrink-0 overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center"
+        className="flex aspect-square w-full items-center justify-center border border-rule bg-paper-raised"
       >
-        <div className="text-center">
-          <div className="text-xs font-semibold text-indigo-800">Photo</div>
-          <div className="mt-0.5 text-[11px] text-indigo-700/80">Add image</div>
+        <div className="text-center text-2xs uppercase tracking-label text-ink-muted">
+          Photo
         </div>
       </div>
     );
@@ -39,255 +49,191 @@ const PersonPhoto = ({ label, testId, src }) => {
       data-testid={testId}
       src={src}
       alt={label}
+      width={600}
+      height={600}
       loading="lazy"
       onError={() => setHasError(true)}
-      className="h-56 w-56 shrink-0 overflow-hidden rounded-2xl border border-slate-200 object-cover"
+      className="aspect-square w-full object-cover"
     />
   );
-};
+}
 
-const PersonCard = ({ name, title, bio, photoTestId, photoSrc, href, ctaLabel = "Visit" }) => {
-  const linkProps = href
-    ? {
-        href,
-        target: "_blank",
-        rel: "noopener noreferrer",
-      }
-    : null;
-
+/**
+ * The original stretched an invisible anchor across the whole card and set the
+ * content to pointer-events-none so clicks fell through to it. That hid the
+ * card's text from the link's accessible name and forced the real CTA to need
+ * a z-index escape hatch. One explicit link is clearer and correct.
+ *
+ * Laid out as a bounded card so the photo and the bio read as one object.
+ */
+function PersonCard({ name, title, bio, photoTestId, photoSrc, href, ctaLabel = "Visit" }) {
   return (
-    <Card
-      className={`h-full ${
-        href ? "relative transition hover:-translate-y-0.5 hover:shadow-md hover:border-slate-300" : ""
-      }`}
-    >
-      {/* Full-card clickable area */}
-      {href && (
-        <a
-          {...linkProps}
-          aria-label={`Open ${name} link in a new tab`}
-          className="absolute inset-0 z-10 rounded-2xl"
-        />
-      )}
-
-      {/*
-        When the overlay link is present, make the content ignore pointer events so clicks go to the overlay.
-        Then explicitly re-enable pointer events on the CTA button.
-      */}
-      <div
-        className={`flex flex-col gap-5 sm:flex-row sm:items-start ${href ? "relative z-0 pointer-events-none" : ""}`}
-      >
+    <article className="grid overflow-hidden rounded-lg border border-rule bg-paper-raised md:grid-cols-3">
+      <div className="md:col-span-1">
         <PersonPhoto label={`${name} photo`} testId={photoTestId} src={photoSrc} />
-
-        <div className="flex-1">
-          <div className="text-lg font-semibold text-slate-900">{name}</div>
-          <div className="mt-0.5 text-sm font-medium text-indigo-700">{title}</div>
-          <p className="mt-4 whitespace-pre-line text-sm leading-6 text-slate-600">{bio}</p>
-
-          {href && (
-            <a
-              {...linkProps}
-              className="pointer-events-auto relative z-20 mt-5 inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
-            >
-              {ctaLabel}
-            </a>
-          )}
-        </div>
       </div>
-    </Card>
+
+      <div className="p-7 sm:p-9 md:col-span-2">
+        <h3 className="font-serif text-2xl leading-snug text-ink">{name}</h3>
+        <div className="mt-2.5 text-2xs uppercase tracking-label text-accent">{title}</div>
+        <p className="mt-6 max-w-xl whitespace-pre-line text-base leading-[1.7] text-ink-muted">
+          {bio}
+        </p>
+
+        {href && (
+          <div className="mt-7">
+            <Button to={href} variant="secondary">
+              {ctaLabel}
+            </Button>
+          </div>
+        )}
+      </div>
+    </article>
   );
-};
+}
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900">
-      <Header />
+    <PageLayout>
+      {/* Hero ------------------------------------------------------------ */}
+      <Section tone="ink" space="tight" className="relative overflow-hidden pt-14 md:pt-20">
+        {/* Soft accent glow, upper right — depth without a literal graphic. */}
+        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-0" />
 
-      {/* Hero */}
-      <Section className="bg-slate-100">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-            <motion.div
-              className="lg:col-span-7"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-                A practical AI partner for teams that want real outcomes
-              </h1>
-              <p className="mt-4 max-w-2xl text-base text-slate-600 md:text-lg">
-                We help founders and operators design, deploy, and improve AI-powered systems without the hype.
-                From strategy and architecture to implementation and enablement, we build solutions that fit your business.
-              </p>
+          <Reveal className="relative z-10 max-w-2xl">
+            <Eyebrow index="01" inverted>
+              About
+            </Eyebrow>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="/#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/#contact";
-                  }}
-                  className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95"
-                >
-                  Book a Consult
-                </a>
-                <a
-                  href="/portfolio"
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50"
-                >
-                  View Portfolio
-                </a>
-              </div>
-            </motion.div>
+            {/* Short enough that the balancer lands the break on the phrase
+                boundary by itself, so no explicit <br> is needed at any width. */}
+            <Display as="h1" size="xl" className="mt-6">
+              A practical AI partner for real outcomes
+            </Display>
 
-            <motion.div
-              className="lg:col-span-5"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl">
-                <div className="flex items-center gap-3">
-                  <Logo size={36} />
-                  <div>
-                    <div className="text-sm font-semibold">EAA Cap</div>
-                    <div className="text-xs text-slate-500">Consulting • Applications • AI Agents</div>
+            <p className="mt-6 max-w-xl text-lg leading-[1.65] text-paper/70">
+              We help founders and operators design, deploy, and improve AI-powered systems
+              without the hype. From strategy and architecture to implementation and
+              enablement, we build solutions that fit your business.
+            </p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button to="/#contact" variant="primary" arrow>
+                Book a Consult
+              </Button>
+              <Button to="/portfolio" variant="inverted">
+                View Portfolio
+              </Button>
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
+
+      {/* Mission --------------------------------------------------------- */}
+      <Section bordered>
+        <Container>
+          <Reveal>
+            <SectionHeader index="02" eyebrow="Mission" title="Our mission" />
+          </Reveal>
+
+          <Reveal>
+            <p className="mt-8 max-w-3xl border-l-2 border-accent pl-8 font-serif text-2xl italic leading-[1.4] text-ink sm:text-3xl">
+              To make technology work for businesses, not the other way around.
+            </p>
+          </Reveal>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-2">
+            {principles.map((group, i) => (
+              <Reveal key={group.heading} delay={i * 0.06}>
+                <div className="h-full rounded-lg border border-rule bg-paper-raised p-7">
+                  <div className="text-2xs uppercase tracking-label text-accent">
+                    {group.heading}
                   </div>
+                  <ul className="mt-5">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-4 border-t border-rule py-3.5 text-base leading-[1.6] text-ink-muted"
+                      >
+                        <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-accent" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="mt-6 grid gap-3">
-                  <div className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 text-indigo-700" />
-                    <div>
-                      <div className="text-sm font-semibold text-slate-900">Outcome-first delivery</div>
-                      <div className="text-sm text-slate-600">We build measurable improvements: speed, quality, and cost.</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                    <ShieldCheck className="mt-0.5 h-5 w-5 text-indigo-700" />
-                    <div>
-                      <div className="text-sm font-semibold text-slate-900">Security & reliability</div>
-                      <div className="text-sm text-slate-600">Pragmatic controls, safe rollouts, and maintainable systems.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </Section>
 
-      {/* Mission */}
-      <Section className="bg-white">
+      {/* Team ------------------------------------------------------------ */}
+      <Section bordered>
         <Container>
-          <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-            <div className="lg:col-span-5">
-              <h2 className="text-2xl font-bold">Our mission</h2>
-              <p className="mt-3 text-slate-600">
-                To make technology work for businesses, not the other way around.
-              </p>
-            </div>
-            <div className="lg:col-span-7 grid gap-4 sm:grid-cols-2">
-              <Card>
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <Target className="h-4 w-4 text-indigo-700" /> What we optimize for
-                </div>
-                <ul className="mt-4 space-y-2 text-sm text-slate-600">
-                  <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-indigo-700" /> Faster workflows and reduced manual effort</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-indigo-700" /> Better customer experience and conversion</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-indigo-700" /> Clear ownership, documentation, and training</li>
-                </ul>
-              </Card>
-              <Card>
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <ShieldCheck className="h-4 w-4 text-indigo-700" /> How we work
-                </div>
-                <ul className="mt-4 space-y-2 text-sm text-slate-600">
-                  <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-indigo-700" /> Short cycles with real deliverables</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-indigo-700" /> Simple, maintainable tech choices</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-indigo-700" /> Knowledge transfer built-in</li>
-                </ul>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Team */}
-      <Section className="bg-slate-100">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold sm:text-3xl">Leadership Team</h2>
-            <p className="mt-2 text-slate-600">Two process-oriented experts that know how to bring visions to life.</p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-1">
-            <PersonCard
-              name="Edgar Alza"
-              title="Founder & CEO"
-              photoTestId="photo-edgar"
-              photoSrc="/team/edgar.png"
-              bio="Edgar is an entrepreneur and product management leader who founded his first company, Lucky Backpack, at 21 and has held senior roles at Amazon Web Services, Amazon Operations, and Accenture. 
-              
-              At Amazon, Edgar led key innovations across AWS customer experience products, notably launching Amazon Connect’s agent applications and scaling them from inception to millions of daily users.
-              
-              Edgar created EAA Cap to enable organizations of any background to adopt practical AI solutions that improve customer experiences and operational efficiency."
+          <Reveal>
+            <SectionHeader
+              index="03"
+              eyebrow="Team"
+              title="Leadership Team"
+              intro="Two process-oriented experts that know how to bring visions to life."
             />
-            <PersonCard
-              name="Clarem Gonzalez"
-              title="Co-Founder & COO"
-              photoTestId="photo-clarem"
-              photoSrc="/team/Clarem.jpg"
-              bio="Clarem is a creative project manager with over 10 years of experience helping brands bring ideas to life.
+          </Reveal>
+
+          <div className="mt-14 space-y-6">
+            <Reveal>
+              <PersonCard
+                name="Edgar Alza"
+                title="Founder & CEO"
+                photoTestId="photo-edgar"
+                photoSrc="/team/edgar.webp"
+                bio="Edgar is an entrepreneur and product management leader who founded his first company, Lucky Backpack, at 21 and has held senior roles at Amazon Web Services, Amazon Operations, and Accenture.
+
+              At Amazon, Edgar led key innovations across AWS customer experience products, notably launching Amazon Connect’s agent applications and scaling them from inception to millions of daily users.
+
+              Edgar created EAA Cap to enable organizations of any background to adopt practical AI solutions that improve customer experiences and operational efficiency."
+              />
+            </Reveal>
+
+            <Reveal>
+              <PersonCard
+                name="Clarem Gonzalez"
+                title="Co-Founder & COO"
+                photoTestId="photo-clarem"
+                photoSrc="/team/clarem.webp"
+                bio="Clarem is a creative project manager with over 10 years of experience helping brands bring ideas to life.
 
 She has worked across food, fashion, tech, and lifestyle, guiding campaigns from the first brief through final launch.
 
 Her strength lies in connecting strategy with execution, keeping teams aligned, timelines on track, and brands looking their best."
-              href="https://claremglez.com"
-              ctaLabel="Visit Site"
-            />
+                href="https://claremglez.com"
+                ctaLabel="Visit Site"
+              />
+            </Reveal>
           </div>
         </Container>
       </Section>
 
-      {/* CTA */}
-      <Section className="bg-white">
+      {/* CTA ------------------------------------------------------------- */}
+      <Section bordered>
         <Container>
-          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-50 to-blue-50 p-8 md:p-10">
-            <div className="grid gap-8 md:grid-cols-12 md:items-center">
-              <div className="md:col-span-8">
-                <h2 className="text-2xl font-bold">Want to see if we’re a fit?</h2>
-                <p className="mt-2 text-slate-600">
-                  Share your goals and we’ll recommend the fastest path to measurable ROI.
-                </p>
-              </div>
-              <div className="md:col-span-4 flex md:justify-end">
-                <a
-                  href="/#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/#contact";
-                  }}
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md active:scale-95 md:w-auto"
-                >
+          <Reveal>
+            <div className="max-w-2xl">
+              <Display as="h2" size="lg">
+                Want to see if we’re a fit?
+              </Display>
+              <p className="mt-5 text-lg leading-[1.65] text-ink-muted">
+                Share your goals and we’ll recommend the fastest path to measurable ROI.
+              </p>
+              <div className="mt-8">
+                <Button to="/#contact" variant="primary" arrow>
                   Book a Consult
-                </a>
+                </Button>
               </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white">
-        <Container className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <Logo size={32} />
-            <div className="text-sm font-semibold">EAA Cap</div>
-          </div>
-          <div className="text-xs text-slate-500">© {new Date().getFullYear()} EAA Cap. All rights reserved.</div>
-        </Container>
-      </footer>
-    </div>
+    </PageLayout>
   );
 }
