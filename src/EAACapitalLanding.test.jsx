@@ -1,35 +1,42 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import EAACapitalLanding from './EAACapitalLanding';
 
-const renderWithRouter = (component) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
-};
+const renderPage = () =>
+  render(
+    <BrowserRouter>
+      <EAACapitalLanding />
+    </BrowserRouter>
+  );
 
+// Nav labels, the company name, emails and the office all appear in BOTH the
+// header/footer chrome and the page body, so getAllByText is used where a
+// single match is not guaranteed. That is a property of having a real footer,
+// not a defect.
 describe('EAACapitalLanding', () => {
-  describe('Hero Section', () => {
+  describe('Hero', () => {
     it('renders the main heading', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Confident AI solutions')).toBeInTheDocument();
-      expect(screen.getByText('focused on real outcomes')).toBeInTheDocument();
+      renderPage();
+      expect(screen.getByText('The right technology,')).toBeInTheDocument();
+      expect(screen.getByText('made simple.')).toBeInTheDocument();
     });
 
     it('renders the hero description', () => {
-      renderWithRouter(<EAACapitalLanding />);
+      renderPage();
       expect(
-        screen.getByText(/EAA Cap helps companies make confident decisions/i)
+        screen.getByText(/EAA Cap helps businesses confidently adopt tools/i)
       ).toBeInTheDocument();
     });
 
-    it('renders CTA buttons in hero', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Book a Free Discovery Call')).toBeInTheDocument();
-      expect(screen.getByText('View Results')).toBeInTheDocument();
+    it('renders the hero calls to action', () => {
+      renderPage();
+      expect(screen.getByText('Start a Conversation')).toHaveAttribute('href', '#contact');
+      expect(screen.getByText('See How We Help')).toHaveAttribute('href', '#results');
     });
 
-    it('displays consulting and implementation tracks', () => {
-      renderWithRouter(<EAACapitalLanding />);
+    it('displays the consulting and implementation tracks', () => {
+      renderPage();
       expect(screen.getByText('Consulting')).toBeInTheDocument();
       expect(screen.getByText('Implementation')).toBeInTheDocument();
       expect(screen.getByText('Product & AI Strategy')).toBeInTheDocument();
@@ -37,156 +44,180 @@ describe('EAACapitalLanding', () => {
     });
   });
 
-  describe('Services Section', () => {
+  describe('Services', () => {
     it('renders the services heading', () => {
-      renderWithRouter(<EAACapitalLanding />);
+      renderPage();
       expect(screen.getByText('What We Do')).toBeInTheDocument();
     });
 
-    it('displays all four service features', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Process Transformation')).toBeInTheDocument();
-      expect(screen.getByText('Professional Websites')).toBeInTheDocument();
-      expect(screen.getByText('CRM & Contact Center')).toBeInTheDocument();
-      expect(screen.getByText('Chatbots & AI Agents')).toBeInTheDocument();
+    // Scoped to the section: "AI Agents" is also an item in the hero's
+    // Implementation track, so an unscoped query matches twice.
+    it('displays all four services', () => {
+      const { container } = renderPage();
+      const services = within(container.querySelector('#services'));
+      expect(services.getByText('Process Transformation')).toBeInTheDocument();
+      expect(services.getByText('Websites')).toBeInTheDocument();
+      expect(services.getByText('CRM & Contact Center')).toBeInTheDocument();
+      expect(services.getByText('AI Agents')).toBeInTheDocument();
     });
 
     it('renders service descriptions', () => {
-      renderWithRouter(<EAACapitalLanding />);
+      renderPage();
       expect(
         screen.getByText(/Modern, responsive websites that convert visitors into customers/i)
       ).toBeInTheDocument();
       expect(
-        screen.getByText(/Automate customer service and sales processes/i)
+        screen.getByText(/Automate front and back office operations/i)
       ).toBeInTheDocument();
+    });
+
+    it('gives every service image alt text and explicit dimensions', () => {
+      const { container } = renderPage();
+      const images = container.querySelectorAll('#services img');
+      expect(images.length).toBe(4);
+      images.forEach((img) => {
+        expect(img).toHaveAttribute('alt', expect.stringMatching(/\S/));
+        expect(img).toHaveAttribute('width');
+        expect(img).toHaveAttribute('height');
+      });
     });
   });
 
-  describe('Results Section', () => {
+  describe('Approach', () => {
+    it('renders the approach section that was previously commented out', () => {
+      renderPage();
+      expect(screen.getByText('A Practical, Outcome-First Approach')).toBeInTheDocument();
+      expect(
+        screen.getByText(/We start by understanding your business/i)
+      ).toBeInTheDocument();
+      for (const step of ['Discover', 'Design', 'Validate', 'Enable']) {
+        expect(screen.getByText(step)).toBeInTheDocument();
+      }
+    });
+  });
+
+  describe('Results', () => {
     it('renders the results heading', () => {
-      renderWithRouter(<EAACapitalLanding />);
+      renderPage();
       expect(screen.getByText('Results that matter')).toBeInTheDocument();
     });
 
-    it('displays key metrics', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('$15M')).toBeInTheDocument();
+    it('displays key metrics and their labels', () => {
+      renderPage();
+      expect(screen.getByText('$5M')).toBeInTheDocument();
       expect(screen.getByText('30%')).toBeInTheDocument();
       expect(screen.getByText('4 wks')).toBeInTheDocument();
-      expect(screen.getByText('2 days')).toBeInTheDocument();
-    });
+      expect(screen.getByText('3 days')).toBeInTheDocument();
 
-    it('displays metric descriptions', () => {
-      renderWithRouter(<EAACapitalLanding />);
       expect(screen.getByText('Savings reported by clients')).toBeInTheDocument();
       expect(screen.getByText('Avg. productivity lift')).toBeInTheDocument();
-      expect(screen.getByText('To production-ready solutions')).toBeInTheDocument();
+      expect(screen.getByText('Avg. time to production')).toBeInTheDocument();
       expect(screen.getByText('Typical training required')).toBeInTheDocument();
     });
 
-    it('renders client testimonial', () => {
-      renderWithRouter(<EAACapitalLanding />);
+    it('renders the client testimonial with attribution', () => {
+      renderPage();
+      expect(screen.getByText(/EAA Cap helped us grow our ABA practice/i)).toBeInTheDocument();
       expect(
-        screen.getByText(/EAA Cap helped us grow our ABA practice/i)
+        screen.getByText(/Alex, CEO of Blossoming Mind Therapies/i)
       ).toBeInTheDocument();
-      expect(screen.getByText(/— Alex, CEO of Blossoming Mind Therapies/i)).toBeInTheDocument();
     });
 
-    it('displays efficiency gains bullet points', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText(/Deploy a customer experience desktop in minutes/i)).toBeInTheDocument();
+    it('displays the efficiency outcomes', () => {
+      renderPage();
+      expect(
+        screen.getByText(/Deploy a customer experience desktop in minutes/i)
+      ).toBeInTheDocument();
       expect(screen.getByText(/20–40% productivity gains/i)).toBeInTheDocument();
       expect(screen.getByText(/Lower IT costs by 25%/i)).toBeInTheDocument();
     });
   });
 
-  describe('Contact Section', () => {
+  describe('Contact', () => {
     it('renders the contact heading', () => {
-      renderWithRouter(<EAACapitalLanding />);
+      renderPage();
       expect(screen.getByText(/Let.?s talk about your roadmap/i)).toBeInTheDocument();
     });
 
-    it('renders contact form with all fields', () => {
-      renderWithRouter(<EAACapitalLanding />);
+    it('renders every form field', () => {
+      renderPage();
       expect(screen.getByPlaceholderText('Enter your name')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('sample@company.com')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('Your company')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('Let us know how we can help you')).toBeInTheDocument();
     });
 
-    it('has correct form action URL', () => {
-      const { container } = renderWithRouter(<EAACapitalLanding />);
+    // Formspree keys off these exact names — renaming one silently breaks
+    // every inbound lead, with no error anywhere.
+    it('preserves the Formspree endpoint and field names', () => {
+      const { container } = renderPage();
       const form = container.querySelector('form');
       expect(form).toHaveAttribute('action', 'https://formspree.io/f/xqadveqj');
       expect(form).toHaveAttribute('method', 'POST');
+
+      for (const name of ['FullName', 'email', 'company', 'message']) {
+        expect(form.querySelector(`[name="${name}"]`)).toBeInTheDocument();
+      }
     });
 
-    it('renders submit button', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Send Inquiry')).toBeInTheDocument();
+    it('associates every form field with a label', () => {
+      renderPage();
+      expect(screen.getByLabelText('Full Name')).toBeInTheDocument();
+      expect(screen.getByLabelText('Email')).toBeInTheDocument();
+      expect(screen.getByLabelText('Company')).toBeInTheDocument();
+      expect(screen.getByLabelText('What do you need help with?')).toBeInTheDocument();
     });
 
-    it('displays contact information cards', () => {
-      renderWithRouter(<EAACapitalLanding />);
+    it('renders the submit button', () => {
+      renderPage();
+      expect(screen.getByRole('button', { name: /send inquiry/i })).toBeInTheDocument();
+    });
+
+    it('displays contact details', () => {
+      renderPage();
       expect(screen.getByText(/Quick chat/i)).toBeInTheDocument();
-      expect(screen.getAllByText(/Email/i).length).toBeGreaterThan(0);
       expect(screen.getByText(/Offices/i)).toBeInTheDocument();
+      expect(screen.getAllByText(/edgar@eaacap.com/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/clarem@eaacap.com/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Fort Lauderdale, FL').length).toBeGreaterThan(0);
     });
 
-    it('displays email addresses', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText(/edgar@eaacap.com/i)).toBeInTheDocument();
-      expect(screen.getByText(/clarem@eaacap.com/i)).toBeInTheDocument();
-    });
-
-    it('displays office location', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Fort Lauderdale, FL')).toBeInTheDocument();
-    });
-
-    it('has Calendly link', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      const calendlyLink = screen.getByText('Schedule time').closest('a');
-      expect(calendlyLink).toHaveAttribute('href', 'https://calendly.com/edgar-eaacap/30min');
-      expect(calendlyLink).toHaveAttribute('target', '_blank');
+    it('links to Calendly in a new tab', () => {
+      renderPage();
+      const link = screen.getByText('Schedule time').closest('a');
+      expect(link).toHaveAttribute('href', 'https://calendly.com/edgar-eaacap/30min');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', expect.stringContaining('noopener'));
     });
   });
 
-  describe('Footer', () => {
-    it('renders footer with company name', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      const footerElements = screen.getAllByText('EAA Cap');
-      expect(footerElements.length).toBeGreaterThan(0);
-    });
-
-    it('displays copyright with current year', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      const currentYear = new Date().getFullYear();
-      expect(screen.getByText(new RegExp(`© ${currentYear} EAA Cap`))).toBeInTheDocument();
-    });
-
-    it('renders logo in footer', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      const logos = screen.getAllByAltText('EAA Cap Logo');
-      expect(logos.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe('Header Integration', () => {
-    it('includes the Header component', () => {
-      renderWithRouter(<EAACapitalLanding />);
-      expect(screen.getByText('Services')).toBeInTheDocument();
+  describe('Chrome', () => {
+    it('renders header and footer', () => {
+      renderPage();
+      expect(screen.getAllByText('EAA Cap').length).toBeGreaterThan(0);
+      expect(screen.getAllByAltText('EAA Cap Logo').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Services').length).toBeGreaterThan(0);
       expect(screen.getByText('Book a Consult')).toBeInTheDocument();
     });
+
+    it('displays the copyright with the current year', () => {
+      renderPage();
+      const year = new Date().getFullYear();
+      expect(screen.getByText(new RegExp(`© ${year} EAA Cap`))).toBeInTheDocument();
+    });
   });
 
-  describe('Section IDs for Navigation', () => {
-    it('has correct section IDs for anchor navigation', () => {
-      const { container } = renderWithRouter(<EAACapitalLanding />);
-      expect(container.querySelector('#home')).toBeInTheDocument();
-      expect(container.querySelector('#services')).toBeInTheDocument();
-      expect(container.querySelector('#results')).toBeInTheDocument();
-      expect(container.querySelector('#contact')).toBeInTheDocument();
+  describe('Anchor navigation', () => {
+    it('keeps the section ids the nav depends on', () => {
+      const { container } = renderPage();
+      for (const id of ['home', 'services', 'results', 'contact']) {
+        expect(container.querySelector(`#${id}`)).toBeInTheDocument();
+      }
+    });
+
+    it('renders the main landmark', () => {
+      renderPage();
+      expect(screen.getByRole('main')).toBeInTheDocument();
     });
   });
 });
