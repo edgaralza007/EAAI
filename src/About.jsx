@@ -226,7 +226,7 @@ export default function About() {
               name="Edgar Alza"
               title="Founder & CEO"
               photoTestId="photo-edgar"
-              photoSrc="/team/Edgar.jpg"
+              photoSrc="/team/edgar.png"
               bio="Edgar is an entrepreneur and product management leader who founded his first company, Lucky Backpack, at 21 and has held senior roles at Amazon Web Services, Amazon Operations, and Accenture. 
               
               At Amazon, Edgar led key innovations across AWS customer experience products, notably launching Amazon Connect’s agent applications and scaling them from inception to millions of daily users.

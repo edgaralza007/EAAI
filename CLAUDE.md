@@ -35,16 +35,18 @@ npm run test:coverage # Run tests with coverage report
 ## Architecture
 
 ### Routing Structure
-The app uses React Router with three main routes defined in `src/main.jsx`:
+The app uses React Router with four main routes defined in `src/main.jsx`:
 - `/` - Landing page (EAACapitalLanding.jsx)
 - `/portfolio` - Portfolio page (Portfolio.jsx)
+- `/portfolio/:slug` - Case study detail page (CaseStudyDetail.jsx), driven by `src/caseStudies.js`
 - `/about` - About page (About.jsx)
 
 All pages share a common Header component with navigation.
 
 ### Component Organization
-- **Page-level components**: `EAACapitalLanding.jsx`, `Portfolio.jsx`, `About.jsx`
+- **Page-level components**: `EAACapitalLanding.jsx`, `Portfolio.jsx`, `CaseStudyDetail.jsx`, `About.jsx`
 - **Shared components**: `Header.jsx` (sticky navigation with mobile menu), `logo.jsx`
+- **Data**: `src/caseStudies.js` exports the `caseStudies` array consumed by both `Portfolio.jsx` (index/cards) and `CaseStudyDetail.jsx` (full detail view, matched by `slug`)
 - **Inline components**: Many pages define small reusable components (Section, Container, Feature, etc.) locally rather than extracting them to separate files
 
 ### Styling Approach
@@ -105,4 +107,4 @@ The contact form uses Formspree for server-side handling. Form fields:
 Primary content editing locations:
 - Landing page copy: `src/EAACapitalLanding.jsx`
 - About page team bios: `src/About.jsx` (PersonCard components)
-- Portfolio items: `src/Portfolio.jsx` (currently minimal, placeholder for future content)
+- Portfolio/case study content: `src/caseStudies.js` (each entry needs `slug`, `title`, `client`, `category`, `excerpt`, `image`, `date`, `readTime`, `tags`, `challenge`, `solution`, `results`, optional `testimonial`, and `technologies`); rendered by `Portfolio.jsx` (index) and `CaseStudyDetail.jsx` (`/portfolio/:slug`)
