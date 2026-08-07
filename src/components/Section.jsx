@@ -7,7 +7,7 @@ const tones = {
 }
 
 const spacing = {
-  default: 'py-20 md:py-28',
+  default: 'py-[58px] md:py-[82px]',
   tight: 'py-14 md:py-20',
   flush: 'py-0',
 }

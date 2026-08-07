@@ -62,10 +62,10 @@ const services = [
 ];
 
 const steps = [
-  { n: "01", title: "Discover", desc: "Stakeholder interviews, baseline metrics, and goal alignment." },
-  { n: "02", title: "Design", desc: "Solution design across product, GTM, and finance." },
-  { n: "03", title: "Validate", desc: "Model, prototype, and iterate with real constraints." },
-  { n: "04", title: "Enable", desc: "Roadmaps, runbooks, and production ready solutions" },
+  { n: "01", title: "Discover", desc: "Interviews with the people doing the work, a baseline on what it costs today, and a target you can measure." },
+  { n: "02", title: "Design", desc: "A blueprint — website, CRM, or AI agent — built around your workflow, not a generic template." },
+  { n: "03", title: "Validate", desc: "Prototype against your real data before anything ships." },
+  { n: "04", title: "Enable", desc: "A live system, documented, with your team trained to run it." },
 ];
 
 const outcomes = [
@@ -104,7 +104,7 @@ export default function EAACapitalLanding() {
                 buttons all stack on the same left rule. */}
             <Reveal className="lg:col-span-7">
               <Eyebrow index="01" inverted>
-                AI for small business
+                AI & process consulting for emerging businesses
               </Eyebrow>
 
               <Display as="h1" size="xl" className="mt-6 max-w-xl">
@@ -225,7 +225,7 @@ export default function EAACapitalLanding() {
               index="03"
               eyebrow="How we work"
               title="A Practical, Outcome-First Approach"
-              intro="We start by understanding your business and design every solution by working backwards from your goals and objectives."
+              intro="We map how your business actually runs, then build backward from the outcome you're after — not a generic playbook."
             />
           </Reveal>
 

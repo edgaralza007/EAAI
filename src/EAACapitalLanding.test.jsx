@@ -88,7 +88,7 @@ describe('EAACapitalLanding', () => {
       renderPage();
       expect(screen.getByText('A Practical, Outcome-First Approach')).toBeInTheDocument();
       expect(
-        screen.getByText(/We start by understanding your business/i)
+        screen.getByText(/We map how your business actually runs/i)
       ).toBeInTheDocument();
       for (const step of ['Discover', 'Design', 'Validate', 'Enable']) {
         expect(screen.getByText(step)).toBeInTheDocument();
